@@ -4,3 +4,4 @@ sqlalchemy
 psycopg[binary]
 pydantic
 python-dotenv
+psycopg2-binary
