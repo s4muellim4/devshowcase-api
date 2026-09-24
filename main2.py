@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, HTTPException, Query, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, ConfigDict, Field
 from sqlalchemy import ForeignKey, create_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, relationship, sessionmaker
@@ -285,7 +286,13 @@ app = FastAPI(
     description="API para cadastro, feedbacks, upvotes e busca de projetos de desenvolvedores.",
     version="1.0.0"
 )
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 def get_db():
     db = SessionLocal()
     try:
